@@ -25,6 +25,7 @@ class JourneysController < ApplicationController
   # POST /journeys.json
   def create
     @journey = Journey.new(journey_params)
+    @journey.user_id = current_user.id
 
     respond_to do |format|
       if @journey.save
@@ -54,9 +55,10 @@ class JourneysController < ApplicationController
   # DELETE /journeys/1
   # DELETE /journeys/1.json
   def destroy
+    @tempPhone = @journey.phone
     @journey.destroy
     respond_to do |format|
-      format.html { redirect_to journeys_url, notice: 'Journey was successfully destroyed.' }
+      format.html { redirect_to showphone_path(phone: @tempPhone), notice: 'Journey was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

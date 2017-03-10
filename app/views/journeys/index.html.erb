@@ -2,13 +2,12 @@
 
 <h1>Journeys</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Phone</th>
       <th>Description</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -16,16 +15,15 @@
     <% @journeys.each do |journey| %>
       <tr>
         <td><%= journey.name %></td>
-        <td><%= journey.phone %></td>
         <td><%= journey.description %></td>
         <td><%= link_to 'Show', journey %></td>
-        <td><%= link_to 'Edit', edit_journey_path(journey) %></td>
-        <td><%= link_to 'Destroy', journey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'I\'ll take it!', journey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Journey', new_journey_path %>
+<% if logged_in? %>
+  <%= link_to 'New Journey', new_journey_path %>
+<% end %>
